@@ -22,6 +22,7 @@
 <script>
 import MenuBar from "src/tools/sseditor/components/MenuBar";
 import SettingsDialog from "src/tools/sseditor/components/SettingsDialog";
+import { useMeta } from "quasar";
 export default {
   name: "sseditorMain",
   components: { SettingsDialog, MenuBar },
@@ -37,6 +38,10 @@ export default {
   },
 
   mounted() {
+    useMeta({
+      title: 'sseditor'
+    });
+
     this.autoCopy = this.$utils.getPreference('autoCopy', false);
   },
 

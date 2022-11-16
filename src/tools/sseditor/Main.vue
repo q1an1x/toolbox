@@ -1,6 +1,8 @@
 <template>
   <div class="fullscreen app">
-    <menu-bar class="bar" @copy="copyToClipboard(input)" />
+    <menu-bar class="bar" @copy="copyAndNotify" @showSettings="showSettings = true" />
+
+    <settings-dialog v-if="showSettings" @close="showSettings = false" />
 
     <q-input
       autogrow
@@ -12,21 +14,35 @@
       input-style="line-height: 2rem"
       @update:model-value="update"
       @keydown.delete="mode = 0"
+      :placeholder="placeholder"
     />
   </div>
 </template>
 
 <script>
 import MenuBar from "src/tools/sseditor/components/MenuBar";
+import SettingsDialog from "src/tools/sseditor/components/SettingsDialog";
 export default {
   name: "sseditorMain",
-  components: { MenuBar },
+  components: { SettingsDialog, MenuBar },
   data() {
     return {
       input: '',
       previous: '',
       mode: 0,
-      dismissIndicator: () => {}
+      dismissIndicator: () => {},
+      showSettings: false,
+      autoCopy: false
+    }
+  },
+
+  mounted() {
+    this.autoCopy = this.$utils.getPreference('autoCopy', false);
+  },
+
+  computed: {
+    placeholder() {
+      return this.$utils.getPreference('hideHint', false) ? '' : 'hint: type \'^2 H_2 O\' for \'²H₂O\'';
     }
   },
 
@@ -54,6 +70,10 @@ export default {
 
   methods: {
     update() {
+      if (this.autoCopy) {
+        this.copyToClipboard(this.input);
+      }
+
       const char = this.input.replace(this.previous, '');
 
       if (char === '_') {
@@ -114,6 +134,10 @@ export default {
         navigator.clipboard.writeText(text);
       }
       copyTextToClipboard(text);
+    },
+
+    copyAndNotify() {
+      this.copyToClipboard(this.input);
       this.$q.notify({
         timeout: 2,
         message: 'Copied to clipboard.'
@@ -166,9 +190,13 @@ export default {
   top: 15px;
   z-index: 5;
 }
+
 </style>
 <style>
 .q-notification {
   transition: 0.3s;
+}
+.input input::placeholder {
+  color: gold !important;
 }
 </style>

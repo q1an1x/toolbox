@@ -6,11 +6,28 @@
       </q-card-section>
 
       <q-card-section>
-        <q-checkbox v-model="preferences.hideHint" label="hide hint placeholder" color="black" />
+        <q-checkbox
+          color="black"
+          v-model="preferences.hideHint"
+          label="hide hint placeholder"
+        />
       </q-card-section>
 
       <q-card-section>
-        <q-checkbox v-model="preferences.autoCopy" label="auto-copy to clipboard while editing" color="black" />
+        <q-checkbox
+          color="black"
+          v-model="preferences.autoCopy"
+          label="auto-copy to clipboard while editing"
+        />
+      </q-card-section>
+
+      <q-card-section>
+        <q-select
+          label="menu bar position"
+          v-model="preferences.menuBarPos"
+          :dropdown-icon="matArrowDropDown"
+          :options="['top left', 'top right', 'bottom left', 'bottom right']"
+        />
       </q-card-section>
 
       <q-card-section>
@@ -25,8 +42,16 @@
 </template>
 
 <script>
+import { matArrowDropDown } from '@quasar/extras/material-icons';
+
 export default {
   name: "SettingsDialog",
+
+  setup() {
+    return {
+      matArrowDropDown
+    }
+  },
 
   data() {
     return {
@@ -44,7 +69,8 @@ export default {
   mounted() {
     this.preferences = {
       hideHint: this.$utils.getPreference('hideHint', false),
-      autoCopy: this.$utils.getPreference('autoCopy', false)
+      autoCopy: this.$utils.getPreference('autoCopy', false),
+      menuBarPos: this.$utils.getPreference('menuBarPos', 'bottom right')
     };
   },
 
@@ -52,6 +78,7 @@ export default {
     save() {
       this.$utils.setPreference('hideHint', this.preferences.hideHint);
       this.$utils.setPreference('autoCopy', this.preferences.autoCopy);
+      this.$utils.setPreference('menuBarPos', this.preferences.menuBarPos);
 
       this.$q.notify({
         message: 'settings saved.',

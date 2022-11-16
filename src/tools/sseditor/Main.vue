@@ -1,6 +1,6 @@
 <template>
   <div class="fullscreen app">
-    <menu-bar class="bar" @copy="copyAndNotify" @showSettings="showSettings = true" />
+    <menu-bar :class="'bar ' + menuBarClass" @copy="copyAndNotify" @showSettings="showSettings = true" />
 
     <settings-dialog v-if="showSettings" @close="showSettings = false" />
 
@@ -43,6 +43,19 @@ export default {
   computed: {
     placeholder() {
       return this.$utils.getPreference('hideHint', false) ? '' : 'hint: type \'^2 H_2 O\' for \'²H₂O\'';
+    },
+
+    menuBarClass() {
+      switch (this.$utils.getPreference('menuBarPos', 'bottom right')) {
+        case 'top left':
+          return 'topLeft';
+        case 'top right':
+          return 'topRight';
+        case 'bottom left':
+          return 'bottomLeft';
+        default:
+          return 'bottomRight';
+      }
     }
   },
 
@@ -186,11 +199,24 @@ export default {
 }
 .bar {
   position: absolute;
-  right: 25px;
-  top: 15px;
   z-index: 5;
 }
-
+.topLeft {
+  left: 25px;
+  top: 15px;
+}
+.topRight {
+  right: 25px;
+  top: 15px;
+}
+.bottomRight {
+  right: 25px;
+  bottom: 15px;
+}
+.bottomLeft {
+  left: 25px;
+  bottom: 15px;
+}
 </style>
 <style>
 .q-notification {

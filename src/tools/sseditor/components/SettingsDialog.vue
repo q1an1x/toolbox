@@ -22,7 +22,7 @@
       <q-separator />
 
       <q-card-section>
-        <div class="text-subtitle1">caret style</div>
+        <div class="text-subtitle1">cursor style</div>
         <q-list bordered separator class="rounded-borders">
           <q-item>
             <q-item-section>
@@ -103,7 +103,7 @@
       </q-card-section>
 
       <q-card-section>
-        note: in order for the changes to take effect, you may need to refresh the page after saving. the caret type option does not yet work with most browsers as the style property used is not implemented, but it might work someday(found out after making it).
+        note: in order for the changes to take effect, you may need to refresh the page after saving. the cursor type option does not yet work with most browsers as the style property used is not implemented, but it might work someday(found out after making it).
       </q-card-section>
 
       <q-card-actions align="right">

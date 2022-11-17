@@ -116,7 +116,7 @@
 </template>
 
 <script>
-import { matArrowDropDown } from '@quasar/extras/material-icons';
+import { matArrowDropDown, matTune, matStyle, matGradient } from '@quasar/extras/material-icons';
 import ColorPicker from "src/tools/sseditor/components/ColorPicker";
 import CaretTypeSelect from "src/tools/sseditor/components/CaretTypeSelect";
 
@@ -149,6 +149,10 @@ export default {
   },
 
   mounted() {
+    this.$q.iconSet.colorPicker.tune = matTune;
+    this.$q.iconSet.colorPicker.palette = matStyle;
+    this.$q.iconSet.colorPicker.spectrum = matGradient;
+
     this.load();
   },
 

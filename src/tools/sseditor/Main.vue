@@ -15,6 +15,7 @@
       @update:model-value="update"
       @keydown.delete="mode = 0"
       :placeholder="placeholder"
+      :style="'font-size: ' + fontSize + 'rem'"
     />
   </div>
 </template>
@@ -33,7 +34,8 @@ export default {
       mode: 0,
       dismissIndicator: () => {},
       showSettings: false,
-      autoCopy: false
+      autoCopy: false,
+      fontSize: 1.5,
     }
   },
 
@@ -43,6 +45,7 @@ export default {
     });
 
     this.autoCopy = this.$utils.getPreference('autoCopy', false);
+    this.fontSize = this.$utils.getPreference('fontSize', 1.5);
   },
 
   computed: {
@@ -195,7 +198,6 @@ export default {
   padding: 0 1rem;
   width: 100%;
   height: 100%;
-  font-size: 1.5rem;
   cursor: text !important;
   line-height: 122rem !important;
 }

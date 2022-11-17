@@ -6,20 +6,39 @@
       </q-card-section>
 
       <q-card-section>
-        <q-checkbox
+        <div class="text-subtitle1">font size</div>
+        <q-slider
+          :min="0.5"
+          :max="3"
+          :step="0.1"
+          label-always
           color="black"
-          v-model="preferences.hideHint"
-          label="hide hint placeholder"
+          v-model="preferences.fontSize"
+          :label-value="fontSizeLabel"
+          markers
         />
       </q-card-section>
 
+      <q-separator />
+
       <q-card-section>
-        <q-checkbox
-          color="black"
-          v-model="preferences.autoCopy"
-          label="auto-copy to clipboard while editing"
-        />
+        <div>
+          <q-checkbox
+            color="black"
+            v-model="preferences.hideHint"
+            label="hide hint placeholder"
+          />
+        </div>
+        <div>
+          <q-checkbox
+            color="black"
+            v-model="preferences.autoCopy"
+            label="auto-copy to clipboard while editing"
+          />
+        </div>
       </q-card-section>
+
+      <q-separator />
 
       <q-card-section>
         <q-select
@@ -53,6 +72,12 @@ export default {
     }
   },
 
+  computed: {
+    fontSizeLabel() {
+      return this.preferences.fontSize + ' rem';
+    }
+  },
+
   data() {
     return {
       visible: true,
@@ -70,7 +95,8 @@ export default {
     this.preferences = {
       hideHint: this.$utils.getPreference('hideHint', false),
       autoCopy: this.$utils.getPreference('autoCopy', false),
-      menuBarPos: this.$utils.getPreference('menuBarPos', 'bottom right')
+      menuBarPos: this.$utils.getPreference('menuBarPos', 'bottom right'),
+      fontSize: this.$utils.getPreference('fontSize', 1.5)
     };
   },
 
@@ -79,6 +105,7 @@ export default {
       this.$utils.setPreference('hideHint', this.preferences.hideHint);
       this.$utils.setPreference('autoCopy', this.preferences.autoCopy);
       this.$utils.setPreference('menuBarPos', this.preferences.menuBarPos);
+      this.$utils.setPreference('fontSize', this.preferences.fontSize);
 
       this.$q.notify({
         message: 'settings saved.',

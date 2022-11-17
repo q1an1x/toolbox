@@ -15,7 +15,7 @@
       @update:model-value="update"
       @keydown.delete="mode = 0"
       :placeholder="placeholder"
-      :style="'font-size: ' + fontSize + 'rem'"
+      :style="'font-size: ' + fontSize + 'rem; caret-color: ' + caretColor + '; caret-shape: ' + caretType"
     />
   </div>
 </template>
@@ -36,6 +36,16 @@ export default {
       showSettings: false,
       autoCopy: false,
       fontSize: 1.5,
+      caretColors: {
+        normal: this.$utils.getPreference('normalCaretColor', '#000000'),
+        super: this.$utils.getPreference('superCaretColor', '#fdae42'),
+        sub: this.$utils.getPreference('subCaretColor', '#55b4f5')
+      },
+      caretTypes: {
+        normal: this.$utils.getPreference('normalCaretType', 'bar'),
+        super: this.$utils.getPreference('superCaretType', 'block'),
+        sub: this.$utils.getPreference('subCaretType', 'block')
+      }
     }
   },
 
@@ -64,6 +74,26 @@ export default {
         default:
           return 'bottomRight';
       }
+    },
+
+    caretColor() {
+      switch (this.mode) {
+        case 1:
+          return this.caretColors.sub;
+        case 2:
+          return this.caretColors.super;
+      }
+      return this.caretColors.normal;
+    },
+
+    caretType() {
+      switch (this.mode) {
+        case 1:
+          return this.caretTypes.sub;
+        case 2:
+          return this.caretTypes.super;
+      }
+      return this.caretTypes.normal;
     }
   },
 

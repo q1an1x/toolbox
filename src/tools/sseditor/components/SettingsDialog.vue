@@ -89,6 +89,16 @@
             label="auto-copy to clipboard while editing"
           />
         </div>
+        <div>
+          <q-card-section>
+            <q-select
+              label="unsupported characters"
+              v-model="preferences.unsupportedChar"
+              :dropdown-icon="matArrowDropDown"
+              :options="['as is', 'cancel']"
+            />
+          </q-card-section>
+        </div>
       </q-card-section>
 
       <q-separator />
@@ -169,6 +179,7 @@ export default {
         superCaretType: this.$utils.getPreference('superCaretType', 'block'),
         subCaretColor: this.$utils.getPreference('subCaretColor', '#55b4f5'),
         subCaretType: this.$utils.getPreference('subCaretType', 'block'),
+        unsupportedChar: this.$utils.getPreference('unsupportedChar', 'as is'),
       };
     },
 
@@ -183,6 +194,7 @@ export default {
       this.$utils.setPreference('superCaretType', this.preferences.superCaretType);
       this.$utils.setPreference('subCaretColor', this.preferences.subCaretColor);
       this.$utils.setPreference('subCaretType', this.preferences.subCaretType);
+      this.$utils.setPreference('unsupportedChar', this.preferences.unsupportedChar);
 
       this.$q.notify({
         message: 'settings saved.',

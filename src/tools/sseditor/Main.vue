@@ -45,7 +45,8 @@ export default {
         normal: this.$utils.getPreference('normalCaretType', 'bar'),
         super: this.$utils.getPreference('superCaretType', 'block'),
         sub: this.$utils.getPreference('subCaretType', 'block')
-      }
+      },
+      unsupportedChar: this.$utils.getPreference('unsupportedChar', 'as is')
     }
   },
 
@@ -205,7 +206,7 @@ export default {
         'A': 'ᴬ', 'B': 'ᴮ', 'C': 'ꟲ', 'D': 'ᴰ', 'E': 'ᴱ', 'F': 'ꟳ', 'G': 'ᴳ', 'H': 'ᴴ', 'I': 'ᴵ',
         'J': 'ᴶ', 'K': 'ᴷ', 'L': 'ᴸ', 'M': 'ᴹ', 'N': 'ᴺ', 'O': 'ᴼ', 'P': 'ᴾ', 'Q': 'ꟴ', 'R': 'ᴿ',
         'S': 'ˢ', 'T': 'ᵀ', 'U': 'ᵁ', 'V': 'ⱽ', 'W': 'ᵂ', 'X': 'ˣ', 'Y': 'ʸ', 'Z': 'ᶻ' // s, x, y, z does not have uppercase
-      }[char] ?? char;
+      }[char] ?? (this.unsupportedChar === 'as is' ? char : '');
     },
 
     getSub(char) {
@@ -217,7 +218,7 @@ export default {
         's': 'ₛ', 't': 'ₜ', 'u': 'ᵤ', 'v': 'ᵥ', /* w */ 'x': 'ₓ', /* y, z */ // subscript misses a lot of characters...
         // and no uppercase at all
         // todo: option to convert uppercase to lowercase subscripts
-      }[char] ?? char;
+      }[char] ?? (this.unsupportedChar === 'as is' ? char : '');
     }
   },
 }

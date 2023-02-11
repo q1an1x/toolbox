@@ -4,7 +4,6 @@
       <div>
         <h2>toolbox</h2>
         <div>just some simple tools to be used with a browser...</div>
-        <div>there is <strong>a</strong> tool currently but i figure i might make more so</div>
       </div>
 
       <div class="q-mt-xl">
@@ -24,7 +23,7 @@
         </q-card>
       </div>
 
-      <div class="q-mt-xl copyright">by tpwhky</div>
+      <div class="q-mt-xl copyright">by qian</div>
     </div>
   </div>
 </template>

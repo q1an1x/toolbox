@@ -30,7 +30,7 @@ export default {
         },
         message: `
         sseditor is a text editor that helps you with entering unicode superscripts/subscripts.<br/>
-        check out some other stuff i made: <a href="https://toolbox.tpwhky.com" target="_blank">https://toolbox.tpwhky.com</a><br/><br/>
+        check out some other stuff i made: <a href="https://toolbox.qian.io" target="_blank">https://toolbox.tpwhky.com</a><br/><br/>
         caret(^) for superscripts<br/>
         underline(_) for subscripts<br/>
         space/delete for normal characters<br/>
